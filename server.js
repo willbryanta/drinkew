@@ -13,6 +13,7 @@ const isSignedIn = require('./middleware/is-signed-in')
 // Load controllers
 const authController = require('./controllers/auth')
 const calendarController = require('./controllers/calender')
+const drinkController = require('./controllers/drink')
 
 // Connect to database
 mongoose.connect(process.env.MONGODB_URI)
@@ -41,6 +42,7 @@ app.use( session({
 app.use(passUserToView)
 app.use('/auth', authController)
 app.use('/calendar', calendarController)
+app.use('/drink', drinkController)
 
 // Home
 app.get('/', (req, res) => {
