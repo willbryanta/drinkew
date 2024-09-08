@@ -1,5 +1,16 @@
 const mongoose = require('mongoose')
 
+const collaboratorSchema = new mongoose.Schema({
+    ids: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    }],
+    names: [{
+        type: String,
+        required: true,
+    }]
+})
+
 const drinkSchema = new mongoose.Schema({
 
     name: {
@@ -13,7 +24,8 @@ const drinkSchema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    collaborators: [collaboratorSchema]
 
 }, { timestamps: true })
 
