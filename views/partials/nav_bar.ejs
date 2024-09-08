@@ -1,0 +1,21 @@
+<nav>
+    <a href="/">Home</a>
+    |
+    <a href="/profile">Profile</a>
+    |
+    <a href="/drinks">All drink reviews</a>
+    |
+    <a href="/drinks/new">Review a drink</a>
+    |
+    <% if(locals.user !== null){ %>
+      <a href="/auth/sign-out">Sign Out</a>
+      <br>
+      <br>
+      Welcome, <%= JSON.stringify(locals.user.username)  %>
+    <% } else {  %>
+      
+    <a href="/auth/sign-up">Sign Up</a>
+    |
+    <a href="/auth/sign-in">Sign In</a>
+    <% } %>
+  </nav>

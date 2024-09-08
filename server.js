@@ -10,6 +10,10 @@ const MongoStore = require('connect-mongo');
 const passUserToView = require('./middleware/pass-user-to-view')
 const isSignedIn = require('./middleware/is-signed-in')
 
+// Load controllers
+const authController = require('./controllers/auth')
+const calendarController = require('./controllers/calender')
+
 // Connect to database
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {
@@ -22,7 +26,7 @@ const User = require('./models/user');
 
 app.set('view engine', 'ejs');
 
-const authController = require('./controllers/auth')
+
 
 app.use( morgan('dev'))
 app.use( express.static('public'))
@@ -36,9 +40,9 @@ app.use( session({
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI})
 }));
 
-app.use('/auth', isSignedIn, authController)
 app.use(passUserToView)
-
+app.use('/auth', authController)
+app.use('/calendar', calendarController)
 
 // Home
 app.get('/', (req, res) => {

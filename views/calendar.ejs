@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calendar</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+        }
+        .calendar-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .today {
+            background-color: #e0f7fa;
+            font-weight: bold;
+        }
+        @media (max-width: 600px) {
+            th, td {
+                padding: 5px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Calendar</h1>
+    </header>
+
+    <div class="calendar-container">
+        <main>
+            <h2><%= month %> <%= year %></h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <% daysOfWeek.forEach(day => { %>
+                            <th><%= day %></th>
+                        <% }) %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% let day = 1; %>
+                    <% for (let i = 0; i < weeks; i++) { %>
+                        <tr>
+                            <% for (let j = 0; j < 7; j++) { %>
+                                <% if (i === 0 && j < firstDay) { %>
+                                    <td></td>
+                                <% } else if (day > daysInMonth) { %>
+                                    <td></td>
+                                <% } else { %>
+                                    <td class="<%= day === today ? 'today' : '' %>"><%= day %></td>
+                                    <% day++; %>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+</html>
