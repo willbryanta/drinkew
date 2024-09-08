@@ -7,6 +7,14 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const passUserToView = require('./middleware/pass-user-to-view')
+const isSignedIn = require('./middleware/is-signed-in')
+
+// Connect to database
+mongoose.connect(process.env.MONGODB_URI)
+mongoose.connection.on('connected', () => {
+    console.log(`Connected!`)
+})
 
 // Load models
 const Drink = require('./models/drink');
@@ -28,13 +36,9 @@ app.use( session({
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI})
 }));
 
-// Connect to database
-mongoose.connect(process.env.MONGODB_URI)
-mongoose.connection.on('connected', () => {
-    console.log(`Connected!`)
-})
+app.use('/auth', isSignedIn, authController)
+app.use(passUserToView)
 
-app.use('/auth', authController)
 
 // Home
 app.get('/', (req, res) => {

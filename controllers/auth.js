@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt')
 // Signup form
 router.get('/sign-up', (req, res) => {
     res.render('auth/sign-up')
-})
+});
 
 // Signup form submit
 router.post('/sign-up', async (req, res) => {
