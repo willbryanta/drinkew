@@ -1,5 +1,5 @@
-
-<%- include('partials/header') %>
+<%- include('../partials/header.ejs')  %>
+<%- include('../partials/nav_bar.ejs')  %>
 
 <h4>These are the details for the following reviewed drink: <% drinks.name %></h4>
 
@@ -20,7 +20,7 @@
 
 <p>
     <strong>Created by: </strong>
-    <%= drinks.owner.username  %>
+    <%= drink.owner.username  %>
 </p>
 
 <a href="/drinks/<%= drinks.id %>/edit">Edit this drink</a>

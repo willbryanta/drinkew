@@ -42,7 +42,7 @@ app.use( session({
 app.use(passUserToView)
 app.use('/auth', authController)
 app.use('/calendar', calendarController)
-app.use('/drink', drinkController)
+app.use('/drinks', drinkController)
 
 // Home
 app.get('/', (req, res) => {

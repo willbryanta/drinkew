@@ -6,12 +6,12 @@ const User = require('../models/user');
 
 // RESTFUL CRUD routes
 
-// New form
+// Create - Show new form
 router.get('/new', (req, res) => {
     res.render('drinks/new');
 })
 
-// Submit form
+// Create - Submit form
 router.post('/', async (req, res) => {
 
     const createdReview = await Drink.create({
@@ -20,23 +20,30 @@ router.post('/', async (req, res) => {
         flavours: req.body.flavours,
         rating: req.body.rating,
         // owner: req.session.user.id >> undefined
-    })
+    });
 
-    res.redirect('/drink')
+    res.redirect('/drinks');
 })
 
-// Read all drinks from database and populate index view
+// Read - Show all drinks from database and populate index view
 router.get('/', async (req, res) => {
     const drinks = await Drink.find();
 
     res.render('index', { drinks })
 });
 
-// Read individual drinks
+// Read - Individual drinks
 router.get('/:id', async (req, res) => {
-    const drink = await Drink.findById( req.params.id )
+    const drink = await Drink.findById( req.params.id ).populate('owner')
 
-    res.render('')
+    res.render('drinks/details');
+})
+
+// Update - Render edit template
+router.put('/drinks/:id/edit', (req, res) => {
+    const drinks = Drink.find();
+
+    res.render('edit', { drinks });
 })
 
 
