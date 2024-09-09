@@ -42,9 +42,39 @@ router.post('/sign-up', async (req, res) => {
     res.redirect('/')
 });
 
-// Sign-in form
+// Show sign-in form
 router.get('/sign-in', (req, res) => {
     res.render('auth/sign-in')
+})
+
+// Post sign-in form
+router.post('/sign-in', (req, res) => {
+    const userExists = User.findOne({ username: req.body.username })
+
+    if(userExists === null){
+        res.render('auth/sign-in', {
+            errMessage: `An account with this username doesn't exist`,
+            username: req.body.username
+        })
+        return;
+    }
+
+    if( !bcrypt.compareSync( req.body.password, userExists.password )){
+        res.render('auth/sign-in', {
+            errMessage: 'Incorrect password. Please try again.',
+            username: req.body.username
+        })
+    }
+
+    req.session.user = {
+        username: req.body.username,
+        password: req.body.password,
+        id: userExists.id
+    }
+
+    req.session.save( () => {
+        res.redirect('/')
+    })
 })
 
 
