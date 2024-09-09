@@ -23,7 +23,7 @@ const drinkSchema = new mongoose.Schema({
         required: true
     },
     fizziness: Number,
-    flavours: [String],
+    flavours: String,
     rating: Number,
     ownerComments: String,
 
