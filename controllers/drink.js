@@ -22,17 +22,15 @@ router.post('/', async (req, res) => {
         // owner: req.session.user.id >> undefined
     })
 
-    res.redirect('/drinks')
+    res.redirect('/drink')
 })
 
 // Read all drinks from database and populate index view
-router.get('/drinks', async (req, res) => {
+router.get('/', async (req, res) => {
     const drinks = await Drink.find();
 
     res.render('index', { drinks })
 });
-
-
 
 
 module.exports = router
