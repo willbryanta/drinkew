@@ -1,0 +1,36 @@
+
+<%- include('partials/header') %>
+
+<h4>These are the details for the following reviewed drink: <% drinks.name %></h4>
+
+<ul>
+        <li>
+            <strong>Name:</strong> <%= drinks.name  %>
+        </li>
+        <li>
+            <strong>Fizziness:</strong> <%= drinks.fizziness %>
+        </li>
+        <li>
+            <strong>Flavours:</strong> <%= drinks.flavours.join(', ') %>
+        </li>
+        <li>
+            <strong>Rating:</strong> <%= drinks.rating %>
+        </li>
+</ul>
+
+<p>
+    <strong>Created by: </strong>
+    <%= drinks.owner.username  %>
+</p>
+
+<a href="/drinks/<%= drinks.id %>/edit">Edit this drink</a>
+<br>
+<form action="/drinks/<%= drinks.id %>/?_method=delete" method="post">
+
+    <button>Delete review</button>
+
+</form>
+
+
+
+<%- include('partials/footer') %>

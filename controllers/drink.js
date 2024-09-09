@@ -32,5 +32,12 @@ router.get('/', async (req, res) => {
     res.render('index', { drinks })
 });
 
+// Read individual drinks
+router.get('/:id', async (req, res) => {
+    const drink = await Drink.findById( req.params.id )
+
+    res.render('')
+})
+
 
 module.exports = router
