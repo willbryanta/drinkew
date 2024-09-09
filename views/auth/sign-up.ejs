@@ -5,6 +5,11 @@
 <body>
   <h1>Create a new account!</h1>
   <form action="/auth/sign-up" method="POST">
+    <% if( locals.errMessage ){ %>
+        <div class="error">
+            <%= errMessage %>
+        </div>
+        <% } %>
     <label for="username">Username:</label>
     <input type="text" name="username" id="username" required />
     <label for="password">Password:</label>
@@ -16,6 +21,7 @@
       id="confirmPassword"
       required
     />
+    <br>
     <button type="submit">Sign up</button>
   </form>
 </body>

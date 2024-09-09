@@ -1,7 +1,7 @@
 <%- include('../partials/header.ejs')  %>
 <%- include('../partials/nav_bar.ejs')  %>
 
-<h4>These are the details for the following reviewed drink: <% drinks.name %></h4>
+<h4>These are the details for the following reviewed drink: <%= drinks.name %></h4>
 
 <ul>
         <li>
@@ -11,16 +11,17 @@
             <strong>Fizziness:</strong> <%= drinks.fizziness %>
         </li>
         <li>
-            <strong>Flavours:</strong> <%= drinks.flavours.join(', ') %>
+            <strong>Flavours:</strong> <%= drinks.flavours %>
         </li>
         <li>
             <strong>Rating:</strong> <%= drinks.rating %>
         </li>
+        
 </ul>
 
 <p>
     <strong>Created by: </strong>
-    <%= drink.owner.username  %>
+    <%= drinks.owner  %>
 </p>
 
 <a href="/drinks/<%= drinks.id %>/edit">Edit this drink</a>
@@ -31,6 +32,4 @@
 
 </form>
 
-
-
-<%- include('partials/footer') %>
+<%- include('../partials/footer') %>

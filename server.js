@@ -40,6 +40,7 @@ app.use( session({
 }));
 
 app.use(passUserToView)
+// app.use(isSignedIn)
 app.use('/auth', authController)
 app.use('/calendar', calendarController)
 app.use('/drinks', drinkController)

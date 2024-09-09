@@ -34,19 +34,20 @@ router.get('/', async (req, res) => {
 
 // Read - Individual drinks
 router.get('/:id', async (req, res) => {
-    const drink = await Drink.findById( req.params.id ).populate('owner')
+    const drinks = await Drink.findById( req.params.id ).populate('owner')
 
-    res.render('drinks/details');
+    res.render('drinks/details', { drinks });
 })
 
 // Update - Render edit template
-router.get('/drinks/:id/edit', (req, res) => {
-    const drinks = Drink.find();
+router.get('/:id/edit', async (req, res) => {
+    const drinks = await Drink.findById(req.params.id);
 
-    res.render('edit', { drinks });
+    res.render('drinks/edit', { drinks });
 })
 
-router.put('/drinks/:id', async (req, res) => {
+// Update - put updated drink review
+router.put('/:id', async (req, res) => {
     const reviewToUpdate = await Drink.findById( req.params.id )
 
     await Drink.findOneAndUpdate(
@@ -64,6 +65,5 @@ router.put('/drinks/:id', async (req, res) => {
 
         res.redirect(`/drinks/${ req.params.id }`)
 })
-
 
 module.exports = router

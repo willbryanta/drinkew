@@ -10,32 +10,43 @@ router.get('/sign-up', (req, res) => {
 
 // Signup form submit
 router.post('/sign-up', async (req, res) => {
+
     const userExists = await User.findOne( { username: req.body.username })
 
     if( userExists !== null ){
-        res.render('auth/sign-up', { errMessage: 'There was an error logging in, did you forget your details?'});
+
+        res.render('auth/sign-up', { 
+            errMessage: 'Your username is already taken',
+            username: req.body.username
+        });
         return;
     }
 
-    if( req.body.password !== req.body.passwordConfirm ){
-        res.render('auth/sign-up', { errMessage: `Your passwords don't match`});
+    if( req.body.password !== req.body.confirmPassword ){
+        res.render('auth/sign-up', { 
+            errMessage: `Your passwords don't match`,
+            username: req.body.username
+        });
         return;
     }
 
     const hashedPassword = bcrypt.hashSync( req.body.password, 10);
-    req.body.password = hashedPassword
+    // req.body.password = hashedPassword
 
     const newUser = await User.create({
         username: req.body.username,
         password: hashedPassword,
     });
+    await newUser.save()
 
     res.redirect('/')
 });
 
-// Login form
-router.get('/login', (req, res) => {
-    res.render('auth/login')
+// Sign-in form
+router.get('/sign-in', (req, res) => {
+    res.render('auth/sign-in')
 })
+
+
 
 module.exports = router
