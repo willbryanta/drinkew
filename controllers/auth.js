@@ -48,8 +48,8 @@ router.get('/sign-in', (req, res) => {
 })
 
 // Post sign-in form
-router.post('/sign-in', (req, res) => {
-    const userExists = User.findOne({ username: req.body.username })
+router.post('/sign-in', async (req, res) => {
+    const userExists = await User.findOne({ username: req.body.username })
 
     if(userExists === null){
         res.render('auth/sign-in', {
@@ -64,6 +64,7 @@ router.post('/sign-in', (req, res) => {
             errMessage: 'Incorrect password. Please try again.',
             username: req.body.username
         })
+        return;
     }
 
     req.session.user = {
@@ -82,7 +83,5 @@ router.get('/sign-out', (req, res) => {
     req.session.destroy();
     res.redirect('/')
 })
-
-
 
 module.exports = router

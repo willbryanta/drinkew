@@ -66,4 +66,10 @@ router.put('/:id', async (req, res) => {
         res.redirect(`/drinks/${ req.params.id }`)
 })
 
+router.delete('/:id', async (req, res) => {
+    await Drink.deleteOne( req.params.id );
+
+    res.redirect('/drinks');
+})
+
 module.exports = router
