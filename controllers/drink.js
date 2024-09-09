@@ -40,10 +40,29 @@ router.get('/:id', async (req, res) => {
 })
 
 // Update - Render edit template
-router.put('/drinks/:id/edit', (req, res) => {
+router.get('/drinks/:id/edit', (req, res) => {
     const drinks = Drink.find();
 
     res.render('edit', { drinks });
+})
+
+router.put('/drinks/:id', async (req, res) => {
+    const reviewToUpdate = await Drink.findById( req.params.id )
+
+    await Drink.findOneAndUpdate(
+        {_id: req.params.id },
+        {
+            name: req.body.name,
+            fizziness: req.body.fizziness,
+            flavours: req.body.flavours,
+            rating: req.body.rating,
+            collaborators: req.body.collaborators
+        },
+        {
+            new: true
+        })
+
+        res.redirect(`/drinks/${ req.params.id }`)
 })
 
 
