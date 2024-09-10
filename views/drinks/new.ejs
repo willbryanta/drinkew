@@ -29,6 +29,9 @@
             Comments: <input type="text" name="ownerComments">
         </label>
     </p>
+    <% if(locals.errMessage){ %>
+        <div><%= errMessage  %></div>
+        <% } %>
     <p>
         <label>
             Collaborators: <input type="text" name="collaborators">

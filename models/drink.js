@@ -2,18 +2,20 @@ const mongoose = require('mongoose')
 
 // Embed list of collaborators
 const collaboratorSchema = new mongoose.Schema({
-    ids: [{
+    ids: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-    }],
-    collabUsernames: [{
-        type: String,
+        ref: 'User'
+    },
+    username: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-    }],
-    comments: [{
+        ref: 'User'
+    },
+    collabComments: {
         type: String,
         required: false
-    }]
+    }
 })
 
 const drinkSchema = new mongoose.Schema({

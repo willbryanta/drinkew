@@ -1,0 +1,18 @@
+
+<%- include('partials/header') %>
+
+<h2>Welcome <%= JSON.stringify(user.username) %></h2>
+
+<h4>These are a list of all of your reviews: </h4>
+
+<ul>
+    <% for ( const drink of drinks ){ %>
+        <li>
+            <strong>Name:</strong><a href="/drinks/<%= drink.id %>"><%= drink.name  %></a>, <strong>Rating</strong> <%= drink.rating %>
+        </li>
+   <% } %> 
+</ul>
+
+
+
+<%- include('partials/footer') %>
