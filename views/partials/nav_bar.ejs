@@ -5,8 +5,10 @@
     |
     <a href="/drinks">All drink reviews</a>
     |
+    <% if(user != null){ %>
     <a href="/drinks/new">Review a drink</a>
     |
+    <% } %>
     <% if(locals.user !== null){ %>
       <a href="/auth/sign-out">Sign Out</a>
       <br>

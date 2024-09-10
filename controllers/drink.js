@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
         fizziness: req.body.fizziness,
         flavours: req.body.flavours,
         rating: req.body.rating,
-        // owner: req.session.user.id >> undefined
+        owner: req.session.user.id
     });
 
     res.redirect('/drinks');
@@ -36,6 +36,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const drinks = await Drink.findById( req.params.id ).populate('owner')
 
+    console.log(drinks)
     res.render('drinks/details', { drinks });
 })
 
@@ -50,6 +51,15 @@ router.get('/:id/edit', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const reviewToUpdate = await Drink.findById( req.params.id )
 
+    // Parsing list of collaborators from form
+    const submitCollaborators = req.body.collaborators
+    const collaboratorsArr = submitCollaborators.split(', ').map(collab => collab.trim());
+
+    // Check whether the collaborator for the created drink exists in the database as a user
+    const collaboratorExists = reviewToUpdate.collaborators.includes(req.body.collaborators)
+
+    console.log(savedCollaborators)
+
     await Drink.findOneAndUpdate(
         {_id: req.params.id },
         {
@@ -57,6 +67,7 @@ router.put('/:id', async (req, res) => {
             fizziness: req.body.fizziness,
             flavours: req.body.flavours,
             rating: req.body.rating,
+            ownerComments: req.body.ownerComments,
             collaborators: req.body.collaborators
         },
         {

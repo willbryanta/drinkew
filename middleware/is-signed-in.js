@@ -4,7 +4,6 @@ function isSignedIn( req, res, next ){
         next();// Proceed to the next route handler
     } else {
         res.redirect('/auth/sign-in'); // Login!
-
     }// IsSignedIn()
 }
 

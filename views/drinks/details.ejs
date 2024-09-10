@@ -16,20 +16,24 @@
         <li>
             <strong>Rating:</strong> <%= drinks.rating %>
         </li>
-        
+        <li>
+            <strong>Comments:</strong> <%= drinks.ownerComments %>
+        </li>
+
 </ul>
 
 <p>
     <strong>Created by: </strong>
-    <%= drinks.owner  %>
+   <%= drinks.owner.username  %>
 </p>
 
+<% if( user != null && (user.id === drinks.owner.id || user.id === drinks.collaborators.includes(drinks.owner.id))){ %>
+<br>
 <a href="/drinks/<%= drinks.id %>/edit">Edit this drink</a>
 <br>
 <form action="/drinks/<%= drinks.id %>/?_method=delete" method="post">
-
     <button>Delete review</button>
-
 </form>
+<% } %>
 
 <%- include('../partials/footer') %>

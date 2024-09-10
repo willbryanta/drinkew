@@ -6,7 +6,7 @@ const collaboratorSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     }],
-    names: [{
+    collabUsernames: [{
         type: String,
         required: true,
     }],

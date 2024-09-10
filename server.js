@@ -12,7 +12,6 @@ const isSignedIn = require('./middleware/is-signed-in')
 
 // Load controllers
 const authController = require('./controllers/auth')
-const calendarController = require('./controllers/calender')
 const drinkController = require('./controllers/drink')
 
 // Connect to database
@@ -42,14 +41,12 @@ app.use( session({
 app.use(passUserToView)
 // app.use(isSignedIn)
 app.use('/auth', authController)
-app.use('/calendar', calendarController)
 app.use('/drinks', drinkController)
 
 // Home
 app.get('/', (req, res) => {
     res.render('home')
 })
-
 
 app.listen(process.env.PORT, () => {
     console.log(`Server listening at http://localhost:${process.env.PORT}`)

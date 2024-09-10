@@ -3,7 +3,7 @@
 
 <h2>Update drink review?</h2>
 
-<form action="/drinks/<%= drinks.id %>" method="POST">
+<form action="/drinks/<%= drinks.id %>?_method=put" method="POST">
 
     <label>
         Name: <input type="text" name="name" id="nameInput" required="true" value="<%= drinks.name  %>">
@@ -22,10 +22,13 @@
     </label>
     <br>
     <label>
+        Comments: <input type="text" name="ownerComments" id="ownerCommentsOnly" value="<%= drinks.ownerComments  %>">
+    </label>
+    <br>
+    <label>
         Collaborators: <input type="text" name="collaborators" id="listCollaborators" value="<%= drinks.collaborators  %>">
     </label>
     <br>
-
     <button>Update review</button>
 </form>
 
