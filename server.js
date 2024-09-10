@@ -39,14 +39,15 @@ app.use( session({
 }));
 
 app.use(passUserToView)
+
+app.use('/auth', authController);
 // app.use(isSignedIn)
-app.use('/auth', authController)
-app.use('/drinks', drinkController)
+app.use('/drinks', isSignedIn, drinkController);
 
 // Home
 app.get('/', (req, res) => {
     res.render('home')
-})
+});
 
 app.listen(process.env.PORT, () => {
     console.log(`Server listening at http://localhost:${process.env.PORT}`)

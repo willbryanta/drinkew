@@ -14,6 +14,20 @@ router.get('/new', (req, res) => {
 // Create - Submit form
 router.post('/', async (req, res) => {
 
+        // // Parsing list of collaborators from form
+        // const submitCollaborators = req.body.collaborators
+        // const collaboratorsArr = submitCollaborators.split(', ').map(collab => collab.trim());
+    
+        // // Check whether the collaborator for the created drink exists in the database as a user
+        // for(const formCollab of collaboratorsArr.length){
+        //     for(const collab of reviewToUpdate.collaborators.length){
+        //         if(reviewToUpdate.collaborators[collab] === ){
+    
+        //         } else {
+                    
+        //         }
+        // }}
+
     const createdReview = await Drink.create({
         name: req.body.name,
         fizziness: req.body.fizziness,
@@ -50,15 +64,6 @@ router.get('/:id/edit', async (req, res) => {
 // Update - put updated drink review
 router.put('/:id', async (req, res) => {
     const reviewToUpdate = await Drink.findById( req.params.id )
-
-    // Parsing list of collaborators from form
-    const submitCollaborators = req.body.collaborators
-    const collaboratorsArr = submitCollaborators.split(', ').map(collab => collab.trim());
-
-    // Check whether the collaborator for the created drink exists in the database as a user
-    const collaboratorExists = reviewToUpdate.collaborators.includes(req.body.collaborators)
-
-    console.log(savedCollaborators)
 
     await Drink.findOneAndUpdate(
         {_id: req.params.id },
