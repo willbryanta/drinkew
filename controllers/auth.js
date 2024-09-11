@@ -11,6 +11,7 @@ router.get('/sign-up', (req, res) => {
 // Signup form submit
 router.post('/sign-up', async (req, res) => {
 
+    try{
     const userExists = await User.findOne( { username: req.body.username })
 
     if( userExists !== null ){
@@ -40,6 +41,11 @@ router.post('/sign-up', async (req, res) => {
     await newUser.save()
 
     res.redirect('/')
+    } catch (err){
+        console.log(err)
+
+        res.status(500).render('errors/500')
+    }
 });
 
 // Show sign-in form
@@ -49,6 +55,7 @@ router.get('/sign-in', (req, res) => {
 
 // Post sign-in form
 router.post('/sign-in', async (req, res) => {
+    try {
     const userExists = await User.findOne({ username: req.body.username })
 
     if(userExists === null){
@@ -76,6 +83,9 @@ router.post('/sign-in', async (req, res) => {
     req.session.save( () => {
         res.redirect('/')
     })
+    } catch (err){
+        res.status(500).render('errors/500')
+    }
 })
 
 // Sign-out
