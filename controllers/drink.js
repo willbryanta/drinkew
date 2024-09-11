@@ -13,6 +13,8 @@ router.get('/new', (req, res) => {
 
 // Create - Submit form
 router.post('/', async (req, res) => {
+       try {
+
         // Parsing list of collaborators from form
         let doAllCollabsExist = false;
         const submitCollaborators = req.body.collaborators
@@ -44,6 +46,8 @@ router.post('/', async (req, res) => {
         owner: req.session.user.id,
         collaborators: collaboratorObjArr
     });
+    }
+    } catch (err)
 
     res.redirect('/drinks');
     }
@@ -60,9 +64,15 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const drinks = await Drink.findById( req.params.id ).populate('owner')
 
-    console.log(drinks)
     res.render('drinks/details', { drinks });
 })
+
+// Read - Profile
+router.get('/profile', async (req, res) => {
+    const drinks = await Drink.findById( req.session.user.id ).populate('owner')
+
+    res.render('profile', { drinks })
+});
 
 // Update - Render edit template
 router.get('/:id/edit', async (req, res) => {
@@ -98,10 +108,6 @@ router.delete('/:id', async (req, res) => {
     res.redirect('/drinks');
 })
 
-router.get('/profile', (req, res) => {
-    const drinks = Drink.findById( req.session.id ).populate('owner')
 
-
-});
 
 module.exports = router

@@ -41,7 +41,6 @@ app.use( session({
 app.use(passUserToView)
 
 app.use('/auth', authController);
-// app.use(isSignedIn)
 app.use('/drinks', isSignedIn, drinkController);
 
 // Home
