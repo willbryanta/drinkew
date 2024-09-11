@@ -1,39 +1,31 @@
-<%- include('../partials/header.ejs')  %>
-<%- include('../partials/nav_bar.ejs')  %>
+<%- include('../partials/header.ejs') %> <%- include('../partials/nav_bar.ejs')
+%>
 
-<h4>These are the details for the following reviewed drink: <%= drinks.name %></h4>
+<h4>
+  These are the details for the following reviewed drink: <%= drinks.name %>
+</h4>
 
 <ul>
-        <li>
-            <strong>Name:</strong> <%= drinks.name  %>
-        </li>
-        <li>
-            <strong>Fizziness:</strong> <%= drinks.fizziness %>
-        </li>
-        <li>
-            <strong>Flavours:</strong> <%= drinks.flavours %>
-        </li>
-        <li>
-            <strong>Rating:</strong> <%= drinks.rating %>
-        </li>
-        <li>
-            <strong>Comments:</strong> <%= drinks.ownerComments %>
-        </li>
-
+  <li><strong>Name:</strong> <%= drinks.name %></li>
+  <li><strong>Fizziness:</strong> <%= drinks.fizziness %></li>
+  <li><strong>Flavours:</strong> <%= drinks.flavours %></li>
+  <li><strong>Rating:</strong> <%= drinks.rating %></li>
+  <li><strong>Comments:</strong> <%= drinks.ownerComments %></li>
 </ul>
 
 <p>
-    <strong>Created by: </strong>
-   <%= drinks.owner.username  %>
+  <strong>Created by: </strong>
+  <%= drinks.owner.username %>
 </p>
 
-<% if( user != null && (user.id === drinks.owner.id || user.id === drinks.collaborators.includes(drinks.owner.id))){ %>
-<br>
+<% if( user != null && (user.id === drinks.owner.id || user.id ===
+drinks.collaborators.includes(drinks.owner.id))){ %>
+<br />
 <a href="/drinks/<%= drinks.id %>/edit">Edit this drink</a>
-<br>
-<form action="/drinks/<%= drinks.id %>/?_method=delete" method="post">
-    <button>Delete review</button>
-</form>
+<br />
 <% } %>
-
-<%- include('../partials/footer') %>
+<% if( user != null && (user.id === drinks.owner.id)){ %>
+<form action="/drinks/<%= drinks.id %>/?_method=delete" method="post">
+  <button>Delete review</button>
+</form>
+<% } %><%- include('../partials/footer') %>

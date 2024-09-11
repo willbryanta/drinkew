@@ -1,24 +1,24 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 // Embed list of collaborators
 const commentSchema = new mongoose.Schema({
-    id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User'
-    },
-    username: {
-        type: String,
-        required: true,
-        ref: 'User'
-    },
-})
+  id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
+  username: {
+    type: String,
+    required: true,
+    ref: "User",
+  },
+});
 
-const drinkSchema = new mongoose.Schema({
-
+const drinkSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     fizziness: Number,
     flavours: String,
@@ -26,16 +26,19 @@ const drinkSchema = new mongoose.Schema({
     ownerComments: String,
 
     owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
-    collaborators: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }]
+    collaborators: [
+      {
+        type: String,
+        ref: "User",
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
-}, { timestamps: true })
+const Drink = mongoose.model("Drink", drinkSchema);
 
-const Drink = mongoose.model('Drink', drinkSchema)
-
-module.exports = Drink
+module.exports = Drink;

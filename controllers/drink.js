@@ -27,7 +27,9 @@ router.post("/", async (req, res) => {
       const user = await User.findOne({ username: formCollab });
 
       if (user) {
-        collaboratorObjArr.push(user);
+        console.log(user.username);
+        collaboratorObjArr.push(String(user.username));
+        console.log(collaboratorObjArr)
       } else {
         doAllCollabsExist = false;
         return res.render("drinks/new", {
@@ -43,6 +45,7 @@ router.post("/", async (req, res) => {
         flavours: req.body.flavours,
         rating: req.body.rating,
         owner: req.session.user.id,
+        commments: req.body.ownerComments,
         collaborators: collaboratorObjArr,
       });
     }
@@ -65,7 +68,6 @@ router.get("/", async (req, res) => {
 
 router.get("/profile", async (req, res) => {
   const drinks = await Drink.find({ owner: req.session.user.id });
-  console.log(drinks);
 
   res.render("profile", { drinks: drinks });
 });
@@ -79,7 +81,7 @@ router.get("/:id", async (req, res) => {
 
 // Update - Render edit template
 router.get("/:id/edit", async (req, res) => {
-  const drinks = await Drink.findById(req.params.id);
+  const drinks = await Drink.findById(req.params.id).populate("owner");
 
   res.render("drinks/edit", { drinks });
 });

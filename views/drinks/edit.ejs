@@ -1,35 +1,75 @@
-<%- include('../partials/header.ejs')  %>
-<%- include('../partials/nav_bar.ejs')  %>
+<%- include('../partials/header.ejs') %> <%- include('../partials/nav_bar.ejs')
+%>
 
 <h2>Update drink review?</h2>
 
 <form action="/drinks/<%= drinks.id %>?_method=put" method="POST">
-
-    <label>
-        Name: <input type="text" name="name" id="nameInput" required="true" value="<%= drinks.name  %>">
-    </label>
-    <br>
-    <label>
-        Fizziness: <input type="number" name="fizziness" id="fizzinessLevel" min="0" max="10" value="<%= drinks.fizziness  %>">
-    </label>
-    <br>
-    <label>
-        Flavours: <input type="text" name="flavours" id="flavoursProfile" value="<%= drinks.flavours  %>">
-    </label>
-    <br>
-    <label>
-        Rating: <input type="number" name="rating" id="overallRating" min="0" max="10" value="<%= drinks.rating  %>">
-    </label>
-    <br>
-    <label>
-        Comments: <input type="text" name="ownerComments" id="ownerCommentsOnly" value="<%= drinks.ownerComments  %>">
-    </label>
-    <br>
-    <label>
-        Collaborators: <input type="text" name="collaborators" id="listCollaborators" value="<%= drinks.collaborators  %>">
-    </label>
-    <br>
-    <button>Update review</button>
+  <label>
+    Name:
+    <input
+      type="text"
+      name="name"
+      id="nameInput"
+      required="true"
+      value="<%= drinks.name  %>"
+    />
+  </label>
+  <br />
+  <label>
+    Fizziness:
+    <input
+      type="number"
+      name="fizziness"
+      id="fizzinessLevel"
+      min="0"
+      max="10"
+      value="<%= drinks.fizziness  %>"
+    />
+  </label>
+  <br />
+  <label>
+    Flavours:
+    <input
+      type="text"
+      name="flavours"
+      id="flavoursProfile"
+      value="<%= drinks.flavours  %>"
+    />
+  </label>
+  <br />
+  <label>
+    Rating:
+    <input
+      type="number"
+      name="rating"
+      id="overallRating"
+      min="0"
+      max="10"
+      value="<%= drinks.rating  %>"
+    />
+  </label>
+  <br />
+  <label>
+    Comments:
+    <input
+      type="text"
+      name="ownerComments"
+      id="ownerCommentsOnly"
+      value="<%= drinks.ownerComments  %>"
+    />
+  </label>
+  <br />
+  <label>
+    Collaborators:
+    <input
+      type="text"
+      name="collaborators"
+      id="listCollaborators"
+      value="<%= drinks.collaborators  %>"
+    />
+  </label>
+  <br />
+  <button>Update review</button>
 </form>
 
 <%- include('../partials/footer') %>
