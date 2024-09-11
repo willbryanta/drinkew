@@ -18,13 +18,12 @@
   <%= drinks.owner.username %>
 </p>
 
-<% if( user != null && (user.id === drinks.owner.id || user.id ===
-drinks.collaborators.includes(drinks.owner.id))){ %>
+<% if( user != null && (user.id === drinks.owner.id ||
+drinks.collaborators.includes(user.username))){ %>
 <br />
 <a href="/drinks/<%= drinks.id %>/edit">Edit this drink</a>
 <br />
-<% } %>
-<% if( user != null && (user.id === drinks.owner.id)){ %>
+<% } %> <% if( user != null && (user.id === drinks.owner.id)){ %>
 <form action="/drinks/<%= drinks.id %>/?_method=delete" method="post">
   <button>Delete review</button>
 </form>

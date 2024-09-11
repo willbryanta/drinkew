@@ -59,6 +59,8 @@
     />
   </label>
   <br />
+  <% if( user != null && (user.id === drinks.owner.id ||
+  drinks.collaborators.includes(user.username))){ %>
   <label>
     Collaborators:
     <input
@@ -68,6 +70,7 @@
       value="<%= drinks.collaborators  %>"
     />
   </label>
+  <% } %>
   <br />
   <button>Update review</button>
 </form>
