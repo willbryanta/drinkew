@@ -48,14 +48,11 @@ router.post("/", async (req, res) => {
     }
 
     res.redirect("/drinks");
-
   } catch (err) {
-    res
-      .status(500)
-      .render("errors/500.ejs", {
-        errMessage:
-          "There was an error trying to process your request. Please try again later.",
-      });
+    res.status(500).render("errors/500.ejs", {
+      errMessage:
+        "There was an error trying to process your request. Please try again later.",
+    });
   }
 });
 
@@ -66,18 +63,18 @@ router.get("/", async (req, res) => {
   res.render("index", { drinks });
 });
 
+router.get("/profile", async (req, res) => {
+  const drinks = await Drink.find({ owner: req.session.user.id });
+  console.log(drinks);
+
+  res.render("profile", { drinks: drinks });
+});
+
 // Read - Individual drinks
 router.get("/:id", async (req, res) => {
   const drinks = await Drink.findById(req.params.id).populate("owner");
 
   res.render("drinks/details", { drinks });
-});
-
-// Read - Profile
-router.get("/profile", async (req, res) => {
-  const drinks = await Drink.findById(req.session.user._id).populate("owner");
-
-  res.render("profile", { drinks });
 });
 
 // Update - Render edit template
