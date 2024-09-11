@@ -45,13 +45,15 @@ router.post('/', async (req, res) => {
         rating: req.body.rating,
         owner: req.session.user.id,
         collaborators: collaboratorObjArr
-    });
+    })}
+    
+    } catch (err){
+
     }
-    } catch (err)
+
 
     res.redirect('/drinks');
-    }
-})
+    });
 
 // Read - Show all drinks from database and populate index view
 router.get('/', async (req, res) => {
