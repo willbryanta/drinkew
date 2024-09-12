@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 
 const Drink = require("../models/drink");
 const User = require("../models/user");
@@ -20,7 +21,7 @@ router.post("/", async (req, res) => {
     const collaboratorsSubmitArr = submitCollaborators
       .split(", ")
       .map((collab) => collab.trim());
-    const collaboratorObjArr = [];
+    const collaboratorsObjArr = [];
 
     // Check whether the collaborator for the created drink exists in the database as a user
     for (const formCollab of collaboratorsSubmitArr) {
@@ -28,7 +29,7 @@ router.post("/", async (req, res) => {
 
       if (user) {
         console.log(user.username);
-        collaboratorObjArr.push(user._id);
+        collaboratorsObjArr.push(user._id);
         console.log(collaboratorObjArr);
       } else {
         doAllCollabsExist = false;
@@ -46,7 +47,7 @@ router.post("/", async (req, res) => {
         rating: req.body.rating,
         owner: req.session.user.id,
         commments: req.body.ownerComments,
-        collaborators: collaboratorObjArr,
+        collaborators: collaboratorsObjArr,
       });
     }
 
@@ -90,6 +91,10 @@ router.get("/:id/edit", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const reviewToUpdate = await Drink.findById(req.params.id);
 
+  const collaboratorsObjArr = reviewToUpdate.collaborators.map(
+    (id) => new mongoose.Types.ObjectId(id)
+  );
+
   await Drink.findOneAndUpdate(
     { _id: req.params.id },
     {
@@ -98,14 +103,14 @@ router.put("/:id", async (req, res) => {
       flavours: req.body.flavours,
       rating: req.body.rating,
       ownerComments: req.body.ownerComments,
-      collaborators: req.body.collaborators,
+      collaborators: collaboratorsObjArr,
     },
     {
       new: true,
     }
   );
 
-  res.redirect(`/drinks/${req.params.id}`);
+  res.redirect(`/drinks/${req.params.id}/?collaborators=collaboratorsObjArr`);
 });
 
 router.delete("/:id", async (req, res) => {
