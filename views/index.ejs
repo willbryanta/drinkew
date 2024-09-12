@@ -1,17 +1,17 @@
-
-<%- include('partials/header.ejs') %>
-<%- include('partials/nav_bar.ejs') %>
+<%- include('partials/header.ejs') %> <%- include('partials/nav_bar.ejs') %>
 
 <h2>Welcome to your drink review index!</h2>
 
-<h4>These are a list of the drinks you have previously reviewed: </h4>
+<h4>These are a list of all public reviews:</h4>
 
 <ul>
-    <% for (const drink of drinks){ %>
-        <li>
-            <strong>Name:</strong><a href="/drinks/<%= drink.id %>"><%= drink.name  %></a>, <strong>Rating</strong> <%= drink.rating %>
-        </li>
-   <% } %>
+  <% for (const drink of drinks){ %>
+  <li>
+    <strong>Name:</strong
+    ><a href="/drinks/<%= drink.id %>"><%= drink.name %></a>,
+    <strong>Rating</strong> <%= drink.rating %>
+  </li>
+  <% } %>
 </ul>
 
 <%- include('partials/footer.ejs') %>

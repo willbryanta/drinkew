@@ -29,10 +29,18 @@ button {
 a:hover,
 button:hover {
   cursor: pointer;
-  background-color: rgb(151, 103, 67);
+  background-color: rgb(205, 147, 104);
   border-radius: 10%;
 }
 
 li {
   list-style-type: none;
+}
+
+.submitBtn {
+  font-size: 1rem;
+}
+
+.submitBtn:hover {
+  background-color: rgb(145, 106, 76);
 }

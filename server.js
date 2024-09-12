@@ -47,7 +47,9 @@ app.use("/drinks", isSignedIn, drinkController);
 
 // Home
 app.get("/", (req, res) => {
-  res.render("home");
+  const url = new URL(req.url, `https://${req.headers.host}`);
+  const welcomeMessage = url.searchParams.get("welcomeMessage");
+  res.render("home", { welcomeMessage });
 });
 
 app.listen(process.env.PORT, () => {

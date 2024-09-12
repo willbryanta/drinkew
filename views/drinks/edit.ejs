@@ -60,7 +60,7 @@
   </label>
   <br />
   <% if( user != null && (user.id === drinks.owner.id ||
-  drinks.collaborators.includes(user.username))){ %>
+  drinks.isCollaborator(user.id))){ %>
   <label>
     Collaborators:
     <input

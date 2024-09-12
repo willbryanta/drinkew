@@ -66,7 +66,7 @@ router.get("/", async (req, res) => {
   res.render("index", { drinks });
 });
 
-router.get("/profile", async (req, res) => {
+router.get("/myReviews", async (req, res) => {
   const drinks = await Drink.find({ owner: req.session.user.id });
 
   res.render("profile", { drinks: drinks });
@@ -74,12 +74,9 @@ router.get("/profile", async (req, res) => {
 
 // Read - Individual drinks
 router.get("/:id", async (req, res) => {
-  const drinks = await Drink.findById(req.params.id).populate("owner");
+  const drink = await Drink.findById(req.params.id).populate("owner");
 
-  console.log(drinks.collaborators);
-  console.log(req.session.user);
-
-  res.render("drinks/details", { drinks });
+  res.render("drinks/details", { drink });
 });
 
 // Update - Render edit template

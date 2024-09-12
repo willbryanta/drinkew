@@ -1,9 +1,9 @@
 <nav>
   <a href="/">Home</a>
   | <% if(user != null){ %>
-  <a href="/drinks/profile">Profile</a>
+  <a href="/drinks/myReviews">My reviews</a>
   | <% } %>
-  <a href="/drinks">All drink reviews</a>
+  <a href="/drinks">Shared reviews</a>
   | <% if(user != null){ %>
   <a href="/drinks/new">Review a drink</a>
   | <% } %> <% if(locals.user !== null){ %>

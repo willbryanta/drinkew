@@ -2,29 +2,29 @@
 %>
 
 <h4>
-  These are the details for the following reviewed drink: <%= drinks.name %>
+  These are the details for the following reviewed drink: <%= drink.name %>
 </h4>
 
 <ul>
-  <li><strong>Name:</strong> <%= drinks.name %></li>
-  <li><strong>Fizziness:</strong> <%= drinks.fizziness %></li>
-  <li><strong>Flavours:</strong> <%= drinks.flavours %></li>
-  <li><strong>Rating:</strong> <%= drinks.rating %></li>
-  <li><strong>Comments:</strong> <%= drinks.ownerComments %></li>
+  <li><strong>Name:</strong> <%= drink.name %></li>
+  <li><strong>Fizziness:</strong> <%= drink.fizziness %></li>
+  <li><strong>Flavours:</strong> <%= drink.flavours %></li>
+  <li><strong>Rating:</strong> <%= drink.rating %></li>
+  <li><strong>Comments:</strong> <%= drink.ownerComments %></li>
 </ul>
 
 <p>
   <strong>Created by: </strong>
-  <%= drinks.owner.username %>
+  <%= drink.owner.username %>
 </p>
 
-<% if( user != null && (user._id === drinks.owner._id ||
-drinks.isCollaborator(user.id))){ %>
+<% if( user != null && (user._id === drink.owner._id ||
+drink.isCollaborator(user.id))){ %>
 <br />
-<a href="/drinks/<%= drinks._id %>/edit">Edit this drink</a>
+<a href="/drinks/<%= drink._id %>/edit">Edit this drink</a>
 <br />
-<% } %> <% if( user != null && user._id === drinks.owner._id){ %>
-<form action="/drinks/<%= drinks._id %>/?_method=delete" method="post">
+<% } %> <% if( user != null && user._id === drink.owner._id){ %>
+<form action="/drinks/<%= drink._id %>/?_method=delete" method="post">
   <button>Delete review</button>
 </form>
 <% } %><%- include('../partials/footer') %>

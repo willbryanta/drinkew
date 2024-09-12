@@ -1,15 +1,23 @@
-
-<%- include('partials/header.ejs') %>
-<%- include('partials/nav_bar.ejs') %>
-
+<%- include('partials/header.ejs') %> <%- include('partials/nav_bar.ejs') %>
 
 <h2>Review all your favourite drinks at Drinkew!</h2>
 
 <h4>A place where you can store all of your reviewed drinks</h4>
 
-<% if( locals.user != null){ %>
-<img src="https://plus.unsplash.com/premium_photo-1682681903841-1f98ce6a1175?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YWxjb2hvbHxlbnwwfHwwfHx8MA%3D%3D" alt="placeholder drink" width="200" height="300">
-<img src="https://images.unsplash.com/photo-1663738797534-d9c327516967?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YWxjb2hvbHxlbnwwfHwwfHx8MA%3D%3D" alt="placeholder drink" width="200" height="300">
-<% } %>
-
-<%- include('partials/footer.ejs') %>
+<br />
+<% if(locals.welcomeMessage){ %>
+<div><%= locals.welcomeMessage %></div>
+<% } %> <% if( locals.user != null){ %>
+<img
+  src="https://plus.unsplash.com/premium_photo-1682681903841-1f98ce6a1175?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YWxjb2hvbHxlbnwwfHwwfHx8MA%3D%3D"
+  alt="placeholder drink"
+  width="200"
+  height="300"
+/>
+<img
+  src="https://images.unsplash.com/photo-1663738797534-d9c327516967?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YWxjb2hvbHxlbnwwfHwwfHx8MA%3D%3D"
+  alt="placeholder drink"
+  width="200"
+  height="300"
+/>
+<% } %> <%- include('partials/footer.ejs') %>

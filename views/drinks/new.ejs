@@ -1,43 +1,30 @@
-<%- include('../partials/header.ejs')  %>
-<%- include('../partials/nav_bar.ejs')  %>
+<%- include('../partials/header.ejs') %> <%- include('../partials/nav_bar.ejs')
+%>
 
 <h2>Review a drink</h2>
 
 <form action="/drinks" method="POST">
-    <p>
-        <label>
-            Name: <input type="text" name="name">
-        </label>
-    </p>
-    <p>
-        <label>
-            Fizziness: <input type="number" name="fizziness" min="0">
-        </label>
-    </p>
-    <p>
-        <label>
-            Flavour(s): <input type="string" name="flavours">
-        </label>
-    </p>
-    <p>
-        <label>
-            Rating: <input type="number" name="rating" min="0">
-        </label>
-    </p>
-    <p>
-        <label>
-            Comments: <input type="text" name="ownerComments">
-        </label>
-    </p>
-    <% if(locals.errMessage){ %>
-        <div><%= errMessage  %></div>
-        <% } %>
-    <p>
-        <label>
-            Collaborators: <input type="text" name="collaborators">
-        </label>
-    </p>
+  <p>
+    <label> Name: <input type="text" name="name" /> </label>
+  </p>
+  <p>
+    <label> Fizziness: <input type="number" name="fizziness" min="0" /> </label>
+  </p>
+  <p>
+    <label> Flavour(s): <input type="string" name="flavours" /> </label>
+  </p>
+  <p>
+    <label> Rating: <input type="number" name="rating" min="0" /> </label>
+  </p>
+  <p>
+    <label> Comments: <input type="text" name="ownerComments" /> </label>
+  </p>
+  <% if(locals.errMessage){ %>
+  <div><%= errMessage %></div>
+  <% } %>
+  <p>
+    <label> Collaborators: <input type="text" name="collaborators" /> </label>
+  </p>
 
-    <button>Submit review</button>
-
+  <button class="submitBtn">Submit review</button>
 </form>
