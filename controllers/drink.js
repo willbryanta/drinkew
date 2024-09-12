@@ -77,6 +77,7 @@ router.get("/:id", async (req, res) => {
   const drinks = await Drink.findById(req.params.id).populate("owner");
 
   console.log(drinks.collaborators);
+  console.log(req.session.user);
 
   res.render("drinks/details", { drinks });
 });

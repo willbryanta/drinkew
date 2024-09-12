@@ -19,12 +19,12 @@
 </p>
 
 <% if( user != null && (user._id === drinks.owner._id ||
-drinks.collaborators.includes(user._id))){ %>
+drinks.isCollaborator(user.id))){ %>
 <br />
-<a href="/drinks/<%= drinks.id %>/edit">Edit this drink</a>
+<a href="/drinks/<%= drinks._id %>/edit">Edit this drink</a>
 <br />
-<% } %> <% if( user != null && user.id === drinks.owner.id){ %>
-<form action="/drinks/<%= drinks.id %>/?_method=delete" method="post">
+<% } %> <% if( user != null && user._id === drinks.owner._id){ %>
+<form action="/drinks/<%= drinks._id %>/?_method=delete" method="post">
   <button>Delete review</button>
 </form>
 <% } %><%- include('../partials/footer') %>

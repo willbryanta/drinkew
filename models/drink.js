@@ -13,6 +13,7 @@ const drinkSchema = new mongoose.Schema(
 
     owner: {
       type: mongoose.Schema.Types.ObjectId,
+      required: true,
       ref: "User",
     },
     collaborators: [
@@ -22,9 +23,18 @@ const drinkSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    methods: {
+      isCollaborator: function (userId) {
+        return this.collaborators.some((collab) => collab.equals(userId));
+      },
+    },
+  }
 );
 
 const Drink = mongoose.model("Drink", drinkSchema);
+
+// drinkSchema.methods.isCollaborator =
 
 module.exports = Drink;
