@@ -28,8 +28,8 @@ router.post("/", async (req, res) => {
 
       if (user) {
         console.log(user.username);
-        collaboratorObjArr.push(String(user.username));
-        console.log(collaboratorObjArr)
+        collaboratorObjArr.push(user._id);
+        console.log(collaboratorObjArr);
       } else {
         doAllCollabsExist = false;
         return res.render("drinks/new", {
@@ -75,6 +75,8 @@ router.get("/profile", async (req, res) => {
 // Read - Individual drinks
 router.get("/:id", async (req, res) => {
   const drinks = await Drink.findById(req.params.id).populate("owner");
+
+  console.log(drinks.collaborators);
 
   res.render("drinks/details", { drinks });
 });
