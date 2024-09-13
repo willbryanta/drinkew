@@ -19,6 +19,7 @@ Drinkew is a place for users to share reviews of drinks they've tried and invite
   - [Details](#details)
   - [Create a Review](#create-review)
   - [Update a Review](#update-review)
+- [Ownership](#ownership)
 - [Next Steps](#nextsteps)
 - [License](#license)
 
@@ -32,19 +33,49 @@ Drinkew is a place for users to share reviews of drinks they've tried and invite
 
 ## Sign Up
 
+![Signup-page](README-views/Signup-page.png)
+
+Create a username and password for an account to join the community of reviewers!
+
 ## Sign In
+
+![Signin-page](README-views/Signin-page.png)
+
+Once you've created an account, sign in and start reviewing drinks.
 
 ## My Reviews
 
-## Shared Reviews
+![My-Reviews](README-views/MyReviews-page.png)
+
+Want to find a drink that you've personally reviewed? At the My Reviews page, all your previous reviews.
 
 ## Shared Reviews
 
-## Review Details
+![Shared-reviews](README-views/Shared-page.png)
 
-## Create a Review
+Our current model is an open user community, all reviews created by any users can be found here!
 
-## Update a Review
+## Details
+
+![Details](README-views/Details-page.png)
+
+They say that the devil is in the details, come to this page if you want to know the details of a review.
+
+## Create Review
+
+![Create-a-review](README-views/Create-page.png)
+
+This is where the magic happens. Get your beverage lined up and your phone handy to submit a drink review and record characteristics such as fizziness, the different flavours and give it an overall rating!
+
+## Update Review
+
+![Update-review](README-views/Update-page.png)
+
+Made a mistake? Do not fret - that's what this page is for! Edit and update any of the review fields. You can even allow other users to edit your review if you list their username as a collaborator.
+
+## Ownership
+
+The user that creates a review becomes the _owner_ of that review and has both edit and delete privileges. At the point of creation or editing, you can also add other '_collaborators_'. A collaborator can edit a review of which they are a listed collaborator but they cannot delete that review. Each review can have multiple collaborators but only one owner.
 
 ## Next Steps
 
@@ -54,4 +85,4 @@ Drinkew is a place for users to share reviews of drinks they've tried and invite
 
 ## License
 
-This website is licensed under the [!Tongan Government](https://www.youtube.com/watch?v=xvFZjo5PgG0)
+This website is licensed under the [Tongan Government](https://www.youtube.com/watch?v=xvFZjo5PgG0)
