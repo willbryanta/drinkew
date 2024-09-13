@@ -8,6 +8,12 @@ Welcome to Drinkew! Ever wanted to remember that amazing cocktail you tried last
 
 Drinkew is a place for users to share reviews of drinks they've tried and invite their friends to join the fun! _Sign Up now to start reviewing!_
 
+## Getting Started
+
+You can access the deployed app which is hosted at [render.com](https://render.com/) at this link [https://drinkew.onrender.com/](https://drinkew.onrender.com/)
+
+To view the planning materials please message me on [my profile](https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile) as this consisted of hardwritten notes and diagrams. See the Appendix for an example ERD (which was not ultimately used).
+
 ## Table of Contents
 
 - [Tech-Stack](#tech-stack)
@@ -22,12 +28,13 @@ Drinkew is a place for users to share reviews of drinks they've tried and invite
 - [Ownership](#ownership)
 - [Next Steps](#nextsteps)
 - [License](#license)
+- [Appendix](#appendix)
 
 ### Technology Stack
 
-- MongoDB
-- Express
-- Node.js
+- [Mongoose](https://mongoosejs.com/docs/)
+- [Express](https://expressjs.com/)
+- [Node.js](https://nodejs.org/en)
 
 ## How to Use
 
@@ -86,3 +93,7 @@ The user that creates a review becomes the _owner_ of that review and has both e
 ## License
 
 This website is licensed under the [Tongan Government](https://www.youtube.com/watch?v=xvFZjo5PgG0)
+
+## Appendix
+
+![ERD](README-views/ERD.png)
