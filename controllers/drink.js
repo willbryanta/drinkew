@@ -17,25 +17,26 @@ router.post("/", async (req, res) => {
   try {
     // Parsing list of collaborators from form
     let doAllCollabsExist = true;
-    const submitCollaborators = req.body.collaborators;
-    const collaboratorsSubmitArr = submitCollaborators
-      .split(", ")
-      .map((collab) => collab.trim());
     const collaboratorsObjArr = [];
 
-    // Check whether the collaborator for the created drink exists in the database as a user
-    for (const formCollab of collaboratorsSubmitArr) {
-      const user = await User.findOne({ username: formCollab });
+    if (req.body.collaborators) {
+      const submitCollaborators = req.body.collaborators;
+      const collaboratorsSubmitArr = submitCollaborators
+        .split(", ")
+        .map((collab) => collab.trim());
 
-      if (user) {
-        console.log(user.username);
-        collaboratorsObjArr.push(user._id);
-        console.log(collaboratorObjArr);
-      } else {
-        doAllCollabsExist = false;
-        return res.render("drinks/new", {
-          errMessage: `Unfortunately one or more of the collaborators you've entered do not have an account.`,
-        });
+      // Check whether the collaborator for the created drink exists in the database as a user
+      for (const formCollab of collaboratorsSubmitArr) {
+        const user = await User.findOne({ username: formCollab });
+
+        if (user) {
+          collaboratorsObjArr.push(user._id);
+        } else {
+          doAllCollabsExist = false;
+          return res.render("drinks/new", {
+            errMessage: `Unfortunately one or more of the collaborators you've entered do not have an account.`,
+          });
+        }
       }
     }
 
@@ -46,7 +47,7 @@ router.post("/", async (req, res) => {
         flavours: req.body.flavours,
         rating: req.body.rating,
         owner: req.session.user.id,
-        commments: req.body.ownerComments,
+        comments: req.body.ownerComments,
         collaborators: collaboratorsObjArr,
       });
     }
@@ -77,23 +78,47 @@ router.get("/myReviews", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const drink = await Drink.findById(req.params.id).populate("owner");
 
+  console.log(drink);
+
   res.render("drinks/details", { drink });
 });
 
 // Update - Render edit template
 router.get("/:id/edit", async (req, res) => {
-  const drinks = await Drink.findById(req.params.id).populate("owner");
+  const drink = await Drink.findById(req.params.id).populate("owner");
 
-  res.render("drinks/edit", { drinks });
+  res.render("drinks/edit", { drink });
 });
 
 // Update - put updated drink review
 router.put("/:id", async (req, res) => {
+  try{
   const reviewToUpdate = await Drink.findById(req.params.id);
 
-  const collaboratorsObjArr = reviewToUpdate.collaborators.map(
-    (id) => new mongoose.Types.ObjectId(id)
-  );
+  // Parsing list of collaborators from form
+  let doAllCollabsExist = true;
+  const collaboratorsObjArr = [];
+
+  if (req.body.collaborators) {
+    const submitCollaborators = req.body.collaborators;
+    const collaboratorsSubmitArr = submitCollaborators
+      .split(", ")
+      .map((collab) => collab.trim());
+
+    // Check whether the collaborator for the created drink exists in the database as a user
+    for (const formCollab of collaboratorsSubmitArr) {
+      const user = await User.findOne({ username: formCollab });
+
+      if (user) {
+        collaboratorsObjArr.push(user._id);
+      } else {
+        doAllCollabsExist = false;
+        return res.render("drinks/new", {
+          errMessage: `Unfortunately one or more of the collaborators you've entered do not have an account.`,
+        });
+      }
+    }
+  }
 
   await Drink.findOneAndUpdate(
     { _id: req.params.id },
@@ -102,6 +127,7 @@ router.put("/:id", async (req, res) => {
       fizziness: req.body.fizziness,
       flavours: req.body.flavours,
       rating: req.body.rating,
+      owner: req.body.owner,
       ownerComments: req.body.ownerComments,
       collaborators: collaboratorsObjArr,
     },
@@ -111,6 +137,9 @@ router.put("/:id", async (req, res) => {
   );
 
   res.redirect(`/drinks/${req.params.id}/?collaborators=collaboratorsObjArr`);
+} catch (err){
+  res.status(400)
+}
 });
 
 router.delete("/:id", async (req, res) => {

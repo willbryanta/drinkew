@@ -3,7 +3,7 @@
 
 <h2>Update drink review?</h2>
 
-<form action="/drinks/<%= drinks.id %>?_method=put" method="POST">
+<form action="/drinks/<%= drink.id %>?_method=put" method="POST">
   <label>
     Name:
     <input
@@ -11,7 +11,7 @@
       name="name"
       id="nameInput"
       required="true"
-      value="<%= drinks.name  %>"
+      value="<%= drink.name  %>"
     />
   </label>
   <br />
@@ -23,7 +23,7 @@
       id="fizzinessLevel"
       min="0"
       max="10"
-      value="<%= drinks.fizziness  %>"
+      value="<%= drink.fizziness  %>"
     />
   </label>
   <br />
@@ -33,7 +33,7 @@
       type="text"
       name="flavours"
       id="flavoursProfile"
-      value="<%= drinks.flavours  %>"
+      value="<%= drink.flavours  %>"
     />
   </label>
   <br />
@@ -45,7 +45,7 @@
       id="overallRating"
       min="0"
       max="10"
-      value="<%= drinks.rating  %>"
+      value="<%= drink.rating  %>"
     />
   </label>
   <br />
@@ -55,19 +55,19 @@
       type="text"
       name="ownerComments"
       id="ownerCommentsOnly"
-      value="<%= drinks.ownerComments  %>"
+      value="<%= drink.ownerComments  %>"
     />
   </label>
   <br />
-  <% if( user != null && (user.id === drinks.owner.id ||
-  drinks.isCollaborator(user.id))){ %>
+  <% if( user != null && (drink.isOwner(user.id) ||
+  drink.isCollaborator(user.id))){ %>
   <label>
     Collaborators:
     <input
       type="text"
       name="collaborators"
       id="listCollaborators"
-      value="<%= drinks.collaborators  %>"
+      value="<%= drink.collaborators  %>"
     />
   </label>
   <% } %>

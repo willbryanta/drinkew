@@ -18,13 +18,13 @@
   <%= drink.owner.username %>
 </p>
 
-<% if( user != null && (user._id === drink.owner._id ||
+<% if( user != null && (drink.isOwner(user.id) ||
 drink.isCollaborator(user.id))){ %>
 <br />
 <a href="/drinks/<%= drink._id %>/edit">Edit this drink</a>
 <br />
-<% } %> <% if( user != null && user._id === drink.owner._id){ %>
+<% } %> <% if( user != null && drink.isOwner(user.id)){ %>
 <form action="/drinks/<%= drink._id %>/?_method=delete" method="post">
-  <button>Delete review</button>
+  <button class="deleteBtn">Delete review</button>
 </form>
 <% } %><%- include('../partials/footer') %>

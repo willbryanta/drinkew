@@ -20,6 +20,7 @@ const drinkSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
+        required: false,
       },
     ],
   },
@@ -28,6 +29,9 @@ const drinkSchema = new mongoose.Schema(
     methods: {
       isCollaborator: function (userId) {
         return this.collaborators.some((collab) => collab.equals(userId));
+      },
+      isOwner: function (userId) {
+        return this.owner._id.equals(userId);
       },
     },
   }

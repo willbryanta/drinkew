@@ -37,10 +37,12 @@ li {
   list-style-type: none;
 }
 
-.submitBtn {
+.submitBtn,
+.deleteBtn {
   font-size: 1rem;
 }
 
-.submitBtn:hover {
+.submitBtn:hover,
+.deleteBtn:hover {
   background-color: rgb(145, 106, 76);
 }
