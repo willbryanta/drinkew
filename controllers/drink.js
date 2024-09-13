@@ -150,10 +150,8 @@ router.delete("/:id", async (req, res) => {
       return res.status(404).render("errors/404");
     }
 
-    // Redirect to the drinks list if deletion was successful
     res.redirect("/drinks");
   } catch (err) {
-    console.error(err); // Log the error for debugging
     res.status(500).render("errors/500.ejs", {
       errMessage:
         "There was an error trying to process your request. Please try again later.",
