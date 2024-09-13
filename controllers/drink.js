@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
         flavours: req.body.flavours,
         rating: req.body.rating,
         owner: req.session.user.id,
-        comments: req.body.ownerComments,
+        ownerComments: req.body.ownerComments,
         collaborators: collaboratorsObjArr,
       });
     }
