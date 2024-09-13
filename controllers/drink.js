@@ -92,60 +92,73 @@ router.get("/:id/edit", async (req, res) => {
 
 // Update - put updated drink review
 router.put("/:id", async (req, res) => {
-  try{
-  const reviewToUpdate = await Drink.findById(req.params.id);
+  try {
+    const reviewToUpdate = await Drink.findById(req.params.id);
 
-  // Parsing list of collaborators from form
-  let doAllCollabsExist = true;
-  const collaboratorsObjArr = [];
+    // Parsing list of collaborators from form
+    let doAllCollabsExist = true;
+    const collaboratorsObjArr = [];
 
-  if (req.body.collaborators) {
-    const submitCollaborators = req.body.collaborators;
-    const collaboratorsSubmitArr = submitCollaborators
-      .split(", ")
-      .map((collab) => collab.trim());
+    if (req.body.collaborators) {
+      const submitCollaborators = req.body.collaborators;
+      const collaboratorsSubmitArr = submitCollaborators
+        .split(", ")
+        .map((collab) => collab.trim());
 
-    // Check whether the collaborator for the created drink exists in the database as a user
-    for (const formCollab of collaboratorsSubmitArr) {
-      const user = await User.findOne({ username: formCollab });
+      // Check whether the collaborator for the created drink exists in the database as a user
+      for (const formCollab of collaboratorsSubmitArr) {
+        const user = await User.findOne({ username: formCollab });
 
-      if (user) {
-        collaboratorsObjArr.push(user._id);
-      } else {
-        doAllCollabsExist = false;
-        return res.render("drinks/new", {
-          errMessage: `Unfortunately one or more of the collaborators you've entered do not have an account.`,
-        });
+        if (user) {
+          collaboratorsObjArr.push(user._id);
+        } else {
+          doAllCollabsExist = false;
+          return res.render("drinks/new", {
+            errMessage: `Unfortunately one or more of the collaborators you've entered do not have an account.`,
+          });
+        }
       }
     }
+
+    await Drink.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        name: req.body.name,
+        fizziness: req.body.fizziness,
+        flavours: req.body.flavours,
+        rating: req.body.rating,
+        owner: req.body.owner,
+        ownerComments: req.body.ownerComments,
+        collaborators: collaboratorsObjArr,
+      },
+      {
+        new: true,
+      }
+    );
+
+    res.redirect(`/drinks/${req.params.id}/?collaborators=collaboratorsObjArr`);
+  } catch (err) {
+    res.status(400).render("errors/400.ejs");
   }
-
-  await Drink.findOneAndUpdate(
-    { _id: req.params.id },
-    {
-      name: req.body.name,
-      fizziness: req.body.fizziness,
-      flavours: req.body.flavours,
-      rating: req.body.rating,
-      owner: req.body.owner,
-      ownerComments: req.body.ownerComments,
-      collaborators: collaboratorsObjArr,
-    },
-    {
-      new: true,
-    }
-  );
-
-  res.redirect(`/drinks/${req.params.id}/?collaborators=collaboratorsObjArr`);
-} catch (err){
-  res.status(400)
-}
 });
 
 router.delete("/:id", async (req, res) => {
-  await Drink.deleteOne(req.params.id);
+  try {
+    const result = await Drink.deleteOne({ _id: req.params.id });
 
-  res.redirect("/drinks");
+    if (result.deletedCount === 0) {
+      return res.status(404).render("errors/404");
+    }
+
+    // Redirect to the drinks list if deletion was successful
+    res.redirect("/drinks");
+  } catch (err) {
+    console.error(err); // Log the error for debugging
+    res.status(500).render("errors/500.ejs", {
+      errMessage:
+        "There was an error trying to process your request. Please try again later.",
+    });
+  }
 });
 
 module.exports = router;
