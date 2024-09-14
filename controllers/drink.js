@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
         const user = await User.findOne({ username: formCollab });
 
         if (user) {
-          collaboratorsObjArr.push(user._id);
+          collaboratorsObjArr.push(user.username);
         } else {
           doAllCollabsExist = false;
           return res.render("drinks/new", {

@@ -18,7 +18,7 @@ const drinkSchema = new mongoose.Schema(
     },
     collaborators: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: "User",
         required: false,
       },
