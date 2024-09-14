@@ -12,7 +12,7 @@ Drinkew is a place for users to share reviews of drinks they've tried and invite
 
 You can access the deployed app which is hosted at [render.com](https://render.com/) at this link [https://drinkew.onrender.com/](https://drinkew.onrender.com/)
 
-To view the planning materials please message me on [my profile](https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile) as this consisted of hardwritten notes and diagrams. See the Appendix for an example ERD (which was not ultimately used).
+To view the planning materials please message me on [my profile](https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile) as this consisted of hardwritten notes and diagrams. See the Appendix for an example ERD (which was not ultimately used). You can also see my Trello board here: https://trello.com/invite/b/66e43a2f89de8fab601da444/ATTI0809256902afe14bc7b241f2f29036ed8A9FC06D/drinkew 
 
 ## Table of Contents
 
