@@ -16,6 +16,8 @@ const drinkSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
+    // Collaborators have edit permissions for drinks but cannot delete the review to which they are a collaborator
+    // Creators of the review can access all write functionality
     collaborators: [
       {
         type: String,
@@ -26,6 +28,8 @@ const drinkSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+
+    // Methods used for conditional rendering when showing/hiding edit UI based on whether users are collaborators or owners
     methods: {
       isCollaborator: function (userId) {
         return this.collaborators.some((collab) => collab.equals(userId));

@@ -72,25 +72,38 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/myReviews", async (req, res) => {
-  const drinks = await Drink.find({ owner: req.session.user.id });
-
-  res.render("profile", { drinks: drinks });
+  try {
+    const drinks = await Drink.find({ owner: req.session.user.id });
+    res.render("profile", { drinks: drinks });
+  } catch (err) {
+    res.status(404).send(err);
+  }
 });
 
 // Read - Individual drinks
 router.get("/:id", async (req, res) => {
-  const drink = await Drink.findById(req.params.id).populate("owner");
-
-  console.log(drink);
-
-  res.render("drinks/details", { drink });
+  try {
+    const drink = await Drink.findById(req.params.id).populate("owner");
+    res.render("drinks/details", { drink });
+  } catch (err) {
+    res.status(404).send(err);
+  }
 });
 
 // Update - Render edit template
 router.get("/:id/edit", async (req, res) => {
-  const drink = await Drink.findById(req.params.id).populate("owner");
+  try {
+    const drink = await Drink.findById(req.params.id).populate("owner");
 
-  res.render("drinks/edit", { drink });
+    if (!drink) {
+      return res
+        .status(404)
+        .send(`I'm afraid we can't find the drink you're trying to edit`);
+    }
+    res.render("drinks/edit", { drink });
+  } catch (err) {
+    res.status(404).send(err);
+  }
 });
 
 // Update - put updated drink review
