@@ -33,6 +33,9 @@ const drinkSchema = new mongoose.Schema(
       isOwner: function (userId) {
         return this.owner._id.equals(userId);
       },
+      canBeEditedBy: function (userId) {
+        return this.isOwner(userId) || this.isCollaborator(userId);
+      },
     },
   }
 );

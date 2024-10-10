@@ -63,9 +63,12 @@ router.post("/", async (req, res) => {
 
 // Read - Show all drinks from database and populate index view
 router.get("/", async (req, res) => {
-  const drinks = await Drink.find();
-
-  res.render("index", { drinks });
+  try {
+    const drinks = await Drink.find();
+    res.render("index", { drinks });
+  } catch (err) {
+    res.status(404).send(err);
+  }
 });
 
 router.get("/myReviews", async (req, res) => {

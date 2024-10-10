@@ -59,8 +59,7 @@
     />
   </label>
   <br />
-  <% if( user != null && (drink.isOwner(user.id) ||
-  drink.isCollaborator(user.id))){ %>
+  <% if( user != null && (drink.canBeEditedBy(user.id))){ %>
   <label>
     Collaborators:
     <input
