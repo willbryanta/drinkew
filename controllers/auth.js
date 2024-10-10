@@ -36,11 +36,17 @@ router.post("/sign-up", async (req, res) => {
       username: req.body.username,
       password: hashedPassword,
     });
+
+    req.session.user = {
+      username: req.body.username,
+      password: hashedPassword,
+    };
+    
     await newUser.save();
 
-    res.redirect(
-      "/?welcomeMessage=You%20have%20successfully%20created%20an%20account,%20please%20sign%20in!"
-    );
+    req.session.save(() => {
+      res.redirect("/");
+    });
   } catch (err) {
     console.log(err);
 

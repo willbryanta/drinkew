@@ -18,8 +18,7 @@
   <%= drink.owner.username %>
 </p>
 
-<% if( user != null && (drink.isOwner(user.id) ||
-drink.isCollaborator(user.id))){ %>
+<% if( user != null && (drink.canBeEditedBy(user.id))){ %>
 <br />
 <a href="/drinks/<%= drink._id %>/edit">Edit this drink</a>
 <br />
