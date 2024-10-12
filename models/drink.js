@@ -32,7 +32,7 @@ const drinkSchema = new mongoose.Schema(
     // Methods used for conditional rendering when showing/hiding edit UI based on whether users are collaborators or owners
     methods: {
       isCollaborator: function (userId) {
-        return this.collaborators.some((collab) => collab.equals(userId));
+        return this.collaborators.includes(userId);
       },
       isOwner: function (userId) {
         return this.owner._id.equals(userId);
@@ -45,7 +45,5 @@ const drinkSchema = new mongoose.Schema(
 );
 
 const Drink = mongoose.model("Drink", drinkSchema);
-
-// drinkSchema.methods.isCollaborator =
 
 module.exports = Drink;

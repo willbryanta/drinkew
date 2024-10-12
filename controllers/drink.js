@@ -84,6 +84,7 @@ router.get("/myReviews", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const drink = await Drink.findById(req.params.id).populate("owner");
+    console.log(drink);
     res.render("drinks/details", { drink });
   } catch (err) {
     res.status(404).send(err);
